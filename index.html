@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="min-height: 5000px;">
+    <h2>Űrlapok</h2>
+    <form>
+        <h3>Név</h3>
+        <input type="text" required>
+
+        <h3>Születési év</h3>
+        <input type="number">
+
+        <h3>Email</h3>
+        <input type="email" required>
+
+        <h3>Telefonszám</h3>
+        <input type="tel" required>
+
+        <h3>Milyen márkájú mobiltelefonod volt már?</h3>
+        <label for="alcatel">Alcatel</label>
+        <input type="checkbox" id="alcatel">
+
+        <label>
+            <input type="checkbox"> Motorola 
+        </label>
+
+        <label>
+            <input type="checkbox"> Samsung
+        </label>
+
+        <label>
+            <input type="checkbox"> Iphone
+        </label>
+        
+        <h3>Melyik a kedvenc telefonmárkád?</h3>
+        <label for="alcatel-radio" name="phone-brand">Alcatel</label>
+        <input type="radio" id="alcatel-radio">
+
+        <label>
+            <input type="radio" name="phone-brand"> Motorola 
+        </label>
+
+        <label>
+            <input type="radio" name="phone-brand"> Samsung
+        </label>
+
+        <label>
+            <input type="radio" name="phone-brand"> Iphone
+        </label>
+
+        <h3>Melyik a kedvenc fagylaltod</h3>
+        <select>
+            <option>citrom</option>
+            <option>menta</option>
+            <option selected>csokoládé</option>
+            <option>vanilia</option>
+            <option>pisztácia</option>
+        </select>
+
+        <h3>Melyik a kedvenc fagylaltod</h3>
+        <select multiple>
+            <option>citrom</option>
+            <option>menta</option>
+            <option selected>csokoládé</option>
+            <option>vanilia</option>
+            <option>pisztácia</option>
+        </select>
+
+        <h3>Válassz színt</h3>
+        <input type="color">
+
+        <h3>Dátum</h3>
+        <input type="date">
+
+        <h3>Időpont</h3>
+        <input type="time">
+
+        <h3>Alapértelmezett érték</h3>
+        <input type="text" value="asdf" readonly>
+
+        <h3>Letiltott mező</h3>
+        <input type="text" disabled>
+
+        <button type="button">Beküldés</button>
+
+        <input type="button" value="Beküldés 2">
+
+        <input type="submit" value="Oldal újratöltése">
+
+
+    </form>
+
+    
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+/*
+    Az űrlapokat form-val csináljuk.
+    A formon belül van egy olyan attribut, hogy action, és ha csinálunk egy buttont a formon belül és megadjuk a formon belüli
+    action attributumnak egy valamilyen http címet, mondjuk https://google.com, akkor a gombra kattintva átvísz minket arra az oldalra.
+
+    Ennek az az értelme, hogy a saját weboldalad valamilyek aloldalára szeretnéd átírányítani magad, mert ez ténylegesen beküldi 
+    a form(űrlap) adatokat a szerverhez. 
+
+    Ha a https://google.com után hozzáírsz a search-öt -> https://google.com/search és létrehozol egy input mezőt a formban, aminek a 
+    type-ja text.
+
+    <form action="https://google.com/search">
+        <input type="text">
+        <button>Beküldés</button>
+    </form>
+
+    type="text" azt jelenti, hogy ez egy szöveges beviteli mező, amíg nem kapcsoljuk össze JavaScriptel, addig semmi értelme nincsen,
+    azon kívül, hogy valamit bele tudok írni.
+
+    Ha az input-ba azt írjuk, hogy attributumként, hogy name="q"
+
+    <form action="https://google.com/search">
+        <input type="text" name="q">
+        <button>Beküldés</button>
+    </form>
+
+    A google-re fogunk átírányítani és a name="q" miatt ha beírunk valamit a mezőnkbe(formunkba) 
+    pl. azt, hogy html akkor átvísz minket a google és rákeresett a htmlre, mintha megnyítottuk volna a google-t a keresőbe
+    és beírtuk volna, hogy html.
+
+    átírányittot minket erre az oldalra -> https://google.com/search?q=html ->
+    a q az itt query kérésnek a rövidétése.
+
+    Hogyha más beállítást nem alkalmazunk, akkor nekünk úgy fogja beküldeni ezt az űrlapot, hogy ilyen url paraméterek
+    (?q=html) lesznek megfeleltetve az input mezőknek, hogyha az input mező kapott input attributomot.
+
+    url szerkezete -> ?q=html és ha több paraméterrel rendelkeznénk, akkor &-jel és még valamit beáálíthatunk
+    ha csak simán a google-ben rákeresünk, hogy html, akkor sokkal több paramétert fogunk kapni -> 
+    https://www.google.com/search?q=html&rlz=1C1KNTJ_huHU1072HU1072&oq=html&gs_lcrp=
+    EgZjaHJvbWUqDggAEEUYJxg7GIAEGIoFMg4IABBFGCcYOxiABBiKBTIGCAEQRRg7MgwIAhAAGEMYgAQYigUyDQgDEAAYgwEYsQMYgAQyBggEEEUYPDIGCAUQ
+    RRg8MgYIBhBFGDwyBggHEEUYQdIBBzU3OWowajeoAgCwAgA&sourceid=chrome&ie=UTF-8
+    böngészőhöz, karakterkódoláshoz van köze. -> paramáterek között mindig &-jel van.
+
+    !!!! Az a lényeg, hogy az input mező name-je az megfeleltethető az url paraméterével !!!!
+*****************************************************************************************************************
+
+    Az input mező type-ja nem csak "text" lehet. 
+    h3>Név</h3>
+        <input type="text">
+
+        <h3>Születési év</h3>
+        <input type="number">
+
+    lehet pl. "number" is ahova számot várunk.
+    Ebben az esetben egy másik típisú input mező jön létre, amibe csak számokat tudunk írni.
+
+    Lehet még egy olyan típusú is, hogy email.
+     <h3>Email</h3>
+    <input type="email">
+    Ennek a jelentőségét majd késöbb veszük, így simán, bele tudunk írni, mindent pontosan ugyanúgy, mintha text mező lenne.
+
+    Létezik egy olyan attributuma az inputnak, hogy required, ilyen kötelezően ki kell tölteni a mezőket és 
+    ha üres akkor nem engedi beküldeni, annak a mező fölé, ami nincsen kitöltve megjelenik valami, hasonló mint egy alert, 
+    azzal a felírattal, hogy kérem töltse ki a mezőt.
+
+    Ha az email-hez írjuk a required-öt ->
+    <h3>Email</h3>
+    <input type="email" required>
+
+    Akkor nem írhatunk be mindenfélét, ha pl. beírom, hogy Lengyel Norbert, akkor egy hasonló hibaüzenetet kapunk, mint amikor 
+    üresen hagytuk -> ezzel a felírattal
+    Kérjük, írjon egy "@" karaktert az email címbe. Formátum ellenőrzés is zajlik. 
+
+    Van még egy olyan type is, hogy "tel", telefonszámokhoz, számokat fogad el.
+    
+    Létezik még olyan type is,hogy "checkbox".
+        <h3>Milyen márkájú mobiltelefonod volt már?</h3>
+        <input type="checkbox"> Alcatel
+        <input type="checkbox"> Motorola 
+        <input type="checkbox"> Samsung
+        <input type="checkbox"> Iphone
+
+        Ezekből többet is be lehet pipálni tehát a checkbox egy többszörös kiválasztó.
+        Ha azt szeretnénk, hogyha a szövegre kattintva is be legyen pipálva, ne csak a kis checkbox négyzetünkre, 
+        akkor létre kell hozni label-öket, ami így fog kinézni -> 
+
+        a label for attributumában megadunk neki egy id-t egyedi azonosítót -> más input mezőnek vagy tag-nek nem 
+        adhatjuk meg ugyanezt az azonosítót.
+
+        Úgy fog kinézni, hogy az input-nal csinálink egy ID-attributumot és ugyanezt az ID nevet megadjuk a label 
+        for attributumának is ->
+
+        <input type="checkbox" id="alcatel">
+        <label for="alcatel">Alcatel</label>
+        
+
+        És most már, ha rákattintunk az Alcaltel-re mint szöveg a label miatt ki fogja pipálni az oldalunkon.
+
+        Ennek van egy egyszerübb formája is, ha a checkbox input-jainkat beletesszük egy label tag-be 
+        és nem kell a for ->
+        <label>
+            <input type="checkbox"> Motorola 
+        </label>
+
+        <label>
+            <input type="checkbox"> Samsung
+        </label>
+
+        <label>
+            <input type="checkbox"> Iphone
+        </label>
+
+        A checkbox egy többszörös kiválasztó <-> egyszeres kiválasztó a radio button -> 
+        <h3>Melyik a kedvenc telefonmárkád?</h3>
+        <label for="alcatel">Alcatel</label>
+        <input type="radio" id="alcatel">
+
+        <label>
+            <input type="radio"> Motorola 
+        </label>
+
+        <label>
+            <input type="radio" checked> Samsung
+        </label>
+
+        <label>
+            <input type="radio"> Iphone
+        </label>
+
+        Ebben az esetben, csak egyet tudunk bejelölni és pöttyök lesznek, nem kis négyzetek, mint a checkbox-nál. 
+
+        Ha valamelyiket bepipáljuk, és utána egy másikat is bepipálunk, akkor az első pipa nem fog eltünni, tehát itt is
+        alapból be tudjuk pipálni akár az összes lehetőséget is -> 
+        Ezért kell adni az összes type-nak egy name="" attributumot is, és amelyeknek ugyanaz a name attributumuk arra át 
+        lehet kattintani. 
+
+        Ha legördülős kiválasztót szeretnénk, akkor azt a select tag-vel lehet elérnünk, amibe bele tudunk rakni option taggeket ->
+        <h3>Melyik a kedvenc fagylaltod</h3>
+        <select>
+            <option>citrom</option>
+            <option>menta</option>
+            <option>csokoládé</option>
+            <option>vanilia</option>
+            <option>pisztácia</option>
+        </select>
+
+        Amiket látunk a selectben optioneket, azok lesznek a legördölő menünek a menüpontjai.
+
+        Ha azt szeretnénk, hogy rögtön a csokoládé legyen kiválasztva, akkor azt kell megadni atributumnak, hogy selected ->
+        <option selected>csokoládé</option>
+
+        Ha a szeretnénk, hogy modnjuk a radio-nál a Samsung legyen alapból kiválasztva, akkor azt írjuk be attributumként, hogy checked ->
+        <label>
+            <input type="radio" checked> Samsung 
+        </label>
+        A checkboxnál is checked van és ott többet, akkár az összeset is be lehet checkedni.
+
+        A selectnek van egy atributuma, hogy multiple és akkor a control + kattintással többet is ki tudunk választani ->
+        (nem annyira logikus, mert a felhasználó nem biztos, hogy tudja, hogy a control + kattintással tud kiválasztani többet.)
+        <select multiple>
+            <option>citrom</option>
+            <option>menta</option>
+            <option selected>csokoládé</option>
+            <option>vanilia</option>
+            <option>pisztácia</option>
+        </select>
+
+        Szín->
+        <h3>Válassz színt</h3>
+        <input type="color">
+        Ha rákattintunk akkor van egy rgb színválasztó, de ha alul rákattintunk akkor lehet HEX kódot is bevinni
+        vagy megmutatja, hogy ugyanannak a színnek mi az rgb és HEX kódja.
+
+        Dátum
+        ahol az input type="date"
+        <h3>Dátum</h3>
+        <input type="date">
+
+        Time -> 
+        <h3>Időpont</h3>
+        <input type="time"> 
+        itt órát és percet tudunk kiválasztani.
+
+        Alapértelmezett érték ->
+        <h3>Alapértelmezett érték</h3>
+        <input type="text" value="asdf">
+        Van egy olyan attributum, hogy value, itt be tudjuk írni, azt az értéket ami nekünk szükséges, de az oldalon 
+        ezt most ki is tudjuk törölni és azt írunk be amit szeretnénk. 
+        Viszont, ha azt szeretnénk, hogy ezt az értéket amit megadtunk value, ne tudjuk kitörölni az oldalon akkor a readonly 
+        atributumot kell utána írnunk ->
+        <h3>Alapértelmezett érték</h3>
+        <input type="text" value="asdf" readonly> -> csak olvasható mező, nem tudjuk módosítani 
+
+        Letiltott mező -> disabled - üres mező, nem tudunk beleírni
+        <h3>Letiltott mező</h3>
+        <input type="text" disabled>
+        Ennek akkor van értelme, ha JavaScriptel összefüzzük és egészen addig nem adhatsz meg egy értéket, amíg egy elözőt ki nem 
+        töröltünk, mert nem lenne logikus, szükségünk van az elöző adatra is és addig nem engedi kitölteni 
+***********************************************************************************************************************************
+
+Button-nek két fajtája (type) van ->  
+1. submit <button type="submit">Beküldés</button>
+2. button
+
+1. Amikor megnyomjuk a gombot akkor újratölti az oldalt és ellenőrzi is a formátumkat is, ha valamit rosszul töltöttünk ki akkor 
+kapunk hibaüzenetet.
+2. Sima button -> nem küldi be az űrlapot és nem tölti újra az oldalt/képernyőt.
+
+Lehet input mezővel is buttont csinálni -> itt lesz 2 db buttonünk egymás mellett -> Beküldés és Beküldés 2 nevűek.
+
+        <button type="button">Beküldés</button>
+
+        <input type="button" value="Beküldés 2">
+
+Lehet input-val submit buttont is csinálni -> type-ja az lesz, hogy submit 
+<input type="submit" value="Oldal újratöltése"> - ténylegesen is újra tudja tölteni az oldalt 
+
+*/
